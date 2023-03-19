@@ -17,8 +17,8 @@ def hello():
    name = request.form.get('name')
    zip = request.form.get('zip')
    if name:
-       print('Request for hello page received with name=%s' % name)
-       return render_template('hello.html', name = name)
+       print('Request for hello page received with name=%s' % zip)
+       return render_template('hello.html', zip = zip)
    else:
        print('Request for hello page received with no name or blank name -- redirecting')
        return redirect(url_for('index'))
