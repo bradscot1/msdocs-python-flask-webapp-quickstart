@@ -16,7 +16,7 @@ def favicon():
 def hello():
    name = request.form.get('name')
    zip = request.form.get('zip')
-   if name:
+   if zip:
        print('Request for hello page received with name=%s' % zip)
        return render_template('hello.html', zip = zip)
    else:
