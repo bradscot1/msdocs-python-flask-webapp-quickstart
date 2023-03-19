@@ -1,21 +1,25 @@
 from datetime import datetime
 from flask import Flask, render_template, request, redirect, url_for, send_from_directory
 import os
-import pyodbc
 import pandas as pd
 import matplotlib.pyplot as plt
+from sqlalchemy import create_engine, text
+
 
 app = Flask(__name__)
 
+
 @app.route('/')
 def index():
-   print('Request for index page received')
-   return render_template('index.html')
+    print('Request for index page received')
+    return render_template('index.html')
+
 
 @app.route('/favicon.ico')
 def favicon():
     return send_from_directory(os.path.join(app.root_path, 'static'),
                                'favicon.ico', mimetype='image/vnd.microsoft.icon')
+
 
 @app.route('/hello', methods=['POST'])
 def hello():
@@ -33,22 +37,33 @@ def hello():
 
 
         # Create the connection string
-        connection_string = 'DRIVER=' + driver + ';SERVER=' + server + ';PORT=1433;DATABASE=' + database + ';UID=' + username + ';PWD=' + password
+        connection_string = f"mssql+pyodbc://{username}:{password}@{server}/{database}?driver={driver}"
 
 
         # Set up the connection
-        conn = pyodbc.connect(connection_string)
-        cursor = conn.cursor()
+        engine = create_engine(connection_string)
+        conn = engine.connect()
 
 
-        #cursor.execute("IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='session' and xtype='U') CREATE TABLE session (zip_code varchar(10), session_id varchar(255))")
-        cursor.execute("INSERT INTO session2 (zip_code) VALUES (?)", zip)
-        conn.commit()
+        # Insert zip code
+        query = text("INSERT INTO session2 (zip_code) VALUES (:zip)")
+        conn.execute(query, zip=zip)
 
 
         # Query the data for the graph
-        cursor.execute("SELECT Season, Reason, AVG(Avg_Price) FROM weather_incidents GROUP BY Season, Reason ORDER BY CASE Season WHEN 'Spring' THEN 1 WHEN 'Summer' THEN 2 WHEN 'Fall' THEN 3 WHEN 'Winter' THEN 4 END")
-        data = cursor.fetchall()
+        query = text("""
+            SELECT Season, Reason, AVG(Avg_Price) 
+            FROM weather_incidents 
+            GROUP BY Season, Reason 
+            ORDER BY 
+                CASE Season 
+                    WHEN 'Spring' THEN 1 
+                    WHEN 'Summer' THEN 2 
+                    WHEN 'Fall' THEN 3 
+                    WHEN 'Winter' THEN 4 
+                END
+        """)
+        data = conn.execute(query)
 
 
         # Create a dictionary to store the data
@@ -66,7 +81,6 @@ def hello():
 
 
         # Close the database connection
-        cursor.close()
         conn.close()
 
 
@@ -74,12 +88,6 @@ def hello():
     else:
         print('Request for hello page received with no name or blank name -- redirecting')
         return redirect(url_for('index'))
-
-
-
-
-
-
 
 
 
