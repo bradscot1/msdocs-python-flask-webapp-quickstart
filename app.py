@@ -24,12 +24,13 @@ def hello():
        server = 'quotechies.database.windows.net'
        database = 'quotechies-db'
        username = 'bscott129@quotechies'
-       password = 'hackathon10!'
+       password = 'hackathon10!'   
        driver= '{ODBC Driver 17 for SQL Server}'
        cnxn = pyodbc.connect('DRIVER=' + driver + ';SERVER=' + server + ';PORT=1433;DATABASE=' + database + ';UID=' + username + ';PWD=' + password)
        cursor = cnxn.cursor()
        cursor.execute("INSERT INTO session (zip_code, session_id) VALUES (?, ?)", zip, request.cookies.get('session_id'))
        cnxn.commit()
+       cnxn.close()
 
        return render_template('hello.html', zip = zip)
    else:
