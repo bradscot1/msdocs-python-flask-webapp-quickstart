@@ -17,20 +17,14 @@ connection_string = 'DRIVER=' + driver + ';SERVER=' + server + ';PORT=1433;DATAB
 conn = pyodbc.connect(connection_string)
 cursor = conn.cursor()
 
-cnxn = pyodbc.connect(connection_string)
+cursor.execute(f"SELECT * FROM session")
 
-# Query the database
-cursor = cnxn.cursor()
-
-
-# Insert zip code and session ID into session table
-zip_code = request.form.get('zip')
-session_id = request.cookies.get('session_id')
-cursor.execute(f"INSERT INTO session (zip_code, session_id) VALUES ('{zip_code}', '{session_id}')")
-
+results = cursor.fetchall()
+for row in results:
+    print(row)
 # Commit the transaction
-cnxn.commit()
+cursor.close()
 
 # Close the database connection
-cnxn.close()
+conn.close()
 
