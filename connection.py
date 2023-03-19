@@ -17,7 +17,8 @@ connection_string = 'DRIVER=' + driver + ';SERVER=' + server + ';PORT=1433;DATAB
 conn = pyodbc.connect(connection_string)
 cursor = conn.cursor()
 
-cursor.execute(f"SELECT * FROM session")
+
+cursor.execute("IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='session' and xtype='U') CREATE TABLE session (zip_code varchar(10), session_id varchar(255))")
 
 results = cursor.fetchall()
 for row in results:
