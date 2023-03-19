@@ -1,6 +1,7 @@
 from datetime import datetime
 from flask import Flask, render_template, request, redirect, url_for, send_from_directory
 import os
+import pyodbc
 app = Flask(__name__)
 
 @app.route('/')
@@ -15,16 +16,26 @@ def favicon():
 
 @app.route('/hello', methods=['POST'])
 def hello():
-   name = request.form.get('name')
    zip = request.form.get('zip')
    if zip:
        print('Request for hello page received with zip=%s' % zip)
+
+       # Insert the zip code and session ID into the database
+       server = 'quotechies.database.windows.net'
+       database = 'quotechies-db'
+       username = 'bscott129@quotechies'
+       password = 'your_password_here'
+       driver= '{ODBC Driver 17 for SQL Server}'
+       cnxn = pyodbc.connect('DRIVER=' + driver + ';SERVER=' + server + ';PORT=1433;DATABASE=' + database + ';UID=' + username + ';PWD=' + password)
+       cursor = cnxn.cursor()
+       cursor.execute("INSERT INTO session (zipcode, sessionID) VALUES (?, ?)", zip, request.cookies.get('session_id'))
+       cnxn.commit()
+
        return render_template('hello.html', zip = zip)
    else:
        print('Request for hello page received with no name or blank name -- redirecting')
        return redirect(url_for('index'))
 
-if __name__ == '__main__':
-   app.run()
+
 
 
