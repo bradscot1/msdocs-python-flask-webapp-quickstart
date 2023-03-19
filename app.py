@@ -15,7 +15,6 @@ def favicon():
                                'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 @app.route('/hello', methods=['POST'])
-@app.route('/hello', methods=['POST'])
 def hello():
     zip = request.form.get('zip')
     if zip:
