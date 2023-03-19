@@ -23,7 +23,8 @@ def favicon():
 
 @app.route('/hello', methods=['POST'])
 def hello():
-    zip = request.form.get('zip')
+    zip2 = request.form.get('zip')
+    zip='000'
     if zip:
         print('Request for hello page received with zip=%s' % zip)
 
@@ -69,15 +70,15 @@ def hello():
         # Create a dictionary to store the data
         graph_data = {}
         for row in data:
-            season, reason, avg_price = row
-            if reason not in graph_data:
-                graph_data[reason] = {
-                    'spring': 0,
-                    'summer': 0,
-                    'fall': 0,
-                    'winter': 0
+            Season, Reason, Avg_Price = row
+            if Reason not in graph_data:
+                graph_data[Reason] = {
+                    'Spring': 0,
+                    'Summer': 0,
+                    'Fall': 0,
+                    'Winter': 0
                 }
-            graph_data[reason][season.lower()] = avg_price
+            graph_data[Reason][Season.lower()] = Avg_Price
 
 
         # Close the database connection
