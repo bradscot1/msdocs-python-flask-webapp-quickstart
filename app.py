@@ -23,7 +23,7 @@ def hello():
        # Insert the zip code and session ID into the database
        server = 'quotechies.database.windows.net'
        database = 'quotechies-db'
-       username = 'bscott129@quotechies'
+       username = 'bscott129'
        password = 'hackathon10!'
        driver= '{ODBC Driver 17 for SQL Server}'
        cnxn = pyodbc.connect('DRIVER=' + driver + ';SERVER=' + server + ';PORT=1433;DATABASE=' + database + ';UID=' + username + ';PWD=' + password)
