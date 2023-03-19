@@ -12,10 +12,16 @@
             <!-- <img  src="/docs/5.1/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57"> -->
             <h1 class="display-6 fw-bold">Zipcode {{zip}}</h1>
             <p class="fs-5">
-                Energy peformance metrics
+                Energy performance metrics
             </p>
+            <div class="container">
+                <canvas id="Energy Surge Costs Due to Outages by Season"></canvas>
+            </div>
             <a href="{{ url_for('index') }}" class="btn btn-primary btn-lg px-4 gap-3">Home</a>
-          </div>
-     </main>      
-   </body>
-</html>
+        </div>
+     </main>
+     <script src="{{ url_for('static', filename='js/Chart.min.js') }}"></script>
+     <script>
+       
+
+

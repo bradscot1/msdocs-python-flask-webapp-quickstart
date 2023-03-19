@@ -12,13 +12,12 @@ driver= '{ODBC Driver 17 for SQL Server}'
 # Create the connection string
 connection_string = 'DRIVER=' + driver + ';SERVER=' + server + ';PORT=1433;DATABASE=' + database + ';UID=' + username + ';PWD=' + password
 
-
 # Set up the connection
 conn = pyodbc.connect(connection_string)
 cursor = conn.cursor()
 
-
 #cursor.execute("IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='session' and xtype='U') CREATE TABLE session (zip_code varchar(10), session_id varchar(255))")
+#this worked
 cursor.execute("Select * from session2")
 conn.commit()
 # Commit the transaction
