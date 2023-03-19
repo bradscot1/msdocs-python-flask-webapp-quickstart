@@ -28,7 +28,7 @@ def hello():
        driver= '{ODBC Driver 17 for SQL Server}'
        cnxn = pyodbc.connect('DRIVER=' + driver + ';SERVER=' + server + ';PORT=1433;DATABASE=' + database + ';UID=' + username + ';PWD=' + password)
        cursor = cnxn.cursor()
-       cursor.execute("INSERT INTO dbo.session (zip_code, session_id) VALUES (?, ?)", zip, request.cookies.get('session_id'))
+       cursor.execute("INSERT INTO session (zip_code, session_id) VALUES (?, ?)", zip, request.cookies.get('session_id'))
        cnxn.commit()
 
        return render_template('hello.html', zip = zip)

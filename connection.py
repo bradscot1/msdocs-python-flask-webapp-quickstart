@@ -18,8 +18,9 @@ conn = pyodbc.connect(connection_string)
 cursor = conn.cursor()
 
 
-cursor.execute("IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='session' and xtype='U') CREATE TABLE session (zip_code varchar(10), session_id varchar(255))")
-
+#cursor.execute("IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='session' and xtype='U') CREATE TABLE session (zip_code varchar(10), session_id varchar(255))")
+cursor.execute("Select * from session2")
+conn.commit()
 # Commit the transaction
 cursor.close()
 
