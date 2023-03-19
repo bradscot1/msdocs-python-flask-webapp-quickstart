@@ -15,27 +15,34 @@ def favicon():
                                'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 @app.route('/hello', methods=['POST'])
+@app.route('/hello', methods=['POST'])
 def hello():
-   zip = request.form.get('zip')
-   if zip:
-       print('Request for hello page received with zip=%s' % zip)
+    zip = request.form.get('zip')
+    if zip:
+        print('Request for hello page received with zip=%s' % zip)
 
-       # Insert the zip code and session ID into the database
-       server = 'quotechies.database.windows.net'
-       database = 'quotechies-db'
-       username = 'bscott129@quotechies'
-       password = 'hackathon10!'   
-       driver= '{ODBC Driver 17 for SQL Server}'
-       cnxn = pyodbc.connect('DRIVER=' + driver + ';SERVER=' + server + ';PORT=1433;DATABASE=' + database + ';UID=' + username + ';PWD=' + password)
-       cursor = cnxn.cursor()
-       cursor.execute("INSERT INTO session (zip_code, session_id) VALUES (?, ?)", zip, request.cookies.get('session_id'))
-       cnxn.commit()
-       cnxn.close()
+        # Insert the zip code into the database
+        server = 'quotechies.database.windows.net'
+        database = 'quotechies-db'
+        username = 'bscott129@quotechies'
+        password = 'hackathon10!'
+        driver = '{ODBC Driver 17 for SQL Server}'
+        cnxn = pyodbc.connect('DRIVER=' + driver + ';SERVER=' + server + ';PORT=1433;DATABASE=' + database + ';UID=' + username + ';PWD=' + password)
+        cursor = cnxn.cursor()
+        cursor.execute("INSERT INTO session (zip_code) VALUES (?)", zip)
+        cnxn.commit()
 
-       return render_template('hello.html', zip = zip)
-   else:
-       print('Request for hello page received with no name or blank name -- redirecting')
-       return redirect(url_for('index'))
+
+        return render_template('hello.html', zip=zip)
+    else:
+        print('Request for hello page received with no name or blank name -- redirecting')
+        return redirect(url_for('index'))
+
+
+
+
+
+
 
 
 
