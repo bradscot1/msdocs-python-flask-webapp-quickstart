@@ -8,7 +8,7 @@ app = Flask(__name__)
 conn = psycopg2.connect(
     host="quotechies.database.windows.net",
     database="quotechies-db",
-    user="bscott129@",
+    user="bscott129@quotechies",
     password="hackathon10!",
     port="1433")
 
