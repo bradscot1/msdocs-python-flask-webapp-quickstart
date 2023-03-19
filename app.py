@@ -10,7 +10,7 @@ conn = psycopg2.connect(
     database="quotechies-db",
     user="bscott129@",
     password="hackathon10!",
-    port="3306")
+    port="1433")
 
 def insert_data(name, zip):
     cur = conn.cursor()
