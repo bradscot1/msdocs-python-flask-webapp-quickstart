@@ -3,8 +3,9 @@ from flask import Flask, render_template, request, redirect, url_for, send_from_
 import os
 import pyodbc
 import pandas as pd
-app = Flask(__name__)
 import matplotlib.pyplot as plt
+
+app = Flask(__name__)
 
 @app.route('/')
 def index():
@@ -15,38 +16,6 @@ def index():
 def favicon():
     return send_from_directory(os.path.join(app.root_path, 'static'),
                                'favicon.ico', mimetype='image/vnd.microsoft.icon')
-
-
-def outages():
-    zip = request.form.get('zip')thi
-    df = pd.read_csv('static/data/outage_mock.csv')
-    # Convert Peak_Price_Duration, Blackout_Duration, Peak_price, and Total_Cost columns to numeric types
-    df['Peak_Price_Duration'] = pd.to_numeric(df['Peak_Price_Duration'])
-    df['Blackout_Duration'] = pd.to_numeric(df['Blackout_Duration'])
-    df['Peak_price'] = pd.to_numeric(df['Peak_price'])
-    df['Total_Cost'] = pd.to_numeric(df['Total_Cost'])
-
-    # Convert Year column to datetime type
-    df['Year'] = pd.to_datetime(df['Year'], format='%Y')
-
-    # Define order of seasons for x-axis labels
-    season_order = ['Spring', 'Summer', 'Fall', 'Winter']
-
-    # Create line plot of average price by reason and season
-    fig, ax = plt.subplots()
-    for reason, group in df.groupby('Reason'):
-        group.groupby('Season')['Avg_Price'].mean().loc[season_order].plot(ax=ax, label=reason)
-
-        # Set title and axis labels
-    plt.title('Average Price by Reason and Season')
-    plt.xlabel('Season')
-    plt.ylabel('Average Price')
-
-# Show legend and plot
-    plt.legend()
-    plt.show()
-
-
 
 @app.route('/hello', methods=['POST'])
 def hello():
