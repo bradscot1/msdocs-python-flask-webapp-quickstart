@@ -6,8 +6,10 @@ from sqlalchemy import create_engine, text
 import csv
 import json
 
+
 app = Flask(__name__)
 app.config['REFERRER_POLICY'] = 'no-referrer-when-downgrade'
+
 
 def read_csv_file(filename):
     with open(filename, 'r') as f:
@@ -21,6 +23,7 @@ def hello():
     if not zip_code:
         return redirect(url_for('index'))
     # Read data from CSV file
+   # Read data from CSV file
     else:
         data = read_csv_file(os.path.join(app.static_folder, 'data', 'outage_mock.csv'))
         graph_data = {}
@@ -62,7 +65,9 @@ def hello():
                 },
                 'title': {
                     'display': True,
-                    'text': 'Increased Energy Costs in your Region'
+                    'text': 'Increased Energy Costs in your Region',
+                    'fontColor': 'white',
+                    'fontSize': 28
                 }
             }
         }
@@ -82,7 +87,7 @@ def hello():
 
         duration_datasets = [{
             'data': [duration_data['Spring'], duration_data['Summer'], duration_data['Fall'], duration_data['Winter']],
-            'backgroundColor': colors
+            'backgroundColor': 'white'
         }]
         duration_chart_data = {
             'type': 'bar',
@@ -95,12 +100,32 @@ def hello():
                     'yAxes': [{
                         'ticks': {
                             'beginAtZero': True
+                        },
+                        'scaleLabel': {
+                            'display': True,
+                            'labelString': 'Hours',
+                            'fontColor': 'white',
+                            'fontSize': 24
+                        }
+                    }],
+                    'xAxes': [{
+                        'ticks': {
+                            'fontColor': 'white',
+                            'fontSize': 16
+                        },
+                        'gridLines': {
+                            'color': 'white'
                         }
                     }]
                 },
                 'title': {
                     'display': True,
-                    'text': 'Total Blackout Hours by Season'
+                    'text': 'Total Blackout Hours by Season',
+                    'fontColor': 'white',
+                    'fontSize': 28
+                },
+                'legend': {
+                    'display': False
                 }
             }
         }
@@ -114,7 +139,12 @@ def favicon():
 
 @app.route('/')
 def index():
-   return render_template('index.html')
+    return render_template('index.html')
 
 if __name__ == '__main__':
     app.run()
+
+
+
+
+
