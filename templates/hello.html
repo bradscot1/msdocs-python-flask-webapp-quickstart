@@ -7,7 +7,9 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-  <h1>Your zipcode:{{ zip }}</h1>
+  <div class="text-center">
+    <h1>Your zipcode:{{ zip }}</h1>
+  </div>
   <div class="chart-container">
       <div class="chart-box">
           <canvas id="myChart"></canvas>
@@ -21,17 +23,51 @@
       var ctx = document.getElementById('myChart').getContext('2d');
       var chart = new Chart(ctx, {{ chart_data|safe }});
 
+
       var barCtx = document.getElementById('barChart').getContext('2d');
       var barChart = new Chart(barCtx, {{ duration_data|safe }});
+      
+      chart.options = {
+          scales: {
+              yAxes: [{
+                  ticks: {
+                      beginAtZero: true,
+                      fontSize: 16 // change font size for yAxes ticks
+                  }
+              }],
+              xAxes: [{
+                  ticks: {
+                      fontSize: 16 // change font size for xAxes ticks
+                  }
+              }]
+          }
+      };
+      
+      barChart.options = {
+          scales: {
+              yAxes: [{
+                  ticks: {
+                      beginAtZero: true,
+                      fontSize: 16 // change font size for yAxes ticks
+                  }
+              }],
+              xAxes: [{
+                  ticks: {
+                      fontSize: 16 // change font size for xAxes ticks
+                  }
+              }]
+          },
+          legend: {
+              labels: {
+                  fontColor: 'black' // set font color to black
+              }
+          }
+      };
+      
+      barChart.data.datasets[0].backgroundColor = 'transparent'; // set background color to transparent for duration dataset
   </script>
 </body>
-
-
-
-
 </html>
-
-
 
 
 
