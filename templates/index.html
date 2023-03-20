@@ -1,44 +1,47 @@
-<html>
-  <head>
+<!doctype html>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Quotechies</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <style>
+        body {
+            background-color: black;
+            color: white;
+        }
+    </style>
 </head>
-<html>
-   <body>
-     <main>
-        <div class="px-4 py-3 my-2 text-center">
-            <img class="d-block mx-auto mb-4" src="{{ url_for('static', filename='images/new-GM-logo-2021.jpg') }}" alt="GM Logo" width="192" height="192"/>
-            <h1 class="display-6 fw-bold text-primary">Welcome to GM Energy</h1>            
-          </div>
-        <form method="post" action="{{ url_for('hello') }}">
-            <div class="col-md-6 mx-auto text-center">
-                <label for="zip" class="form-label fw-bold fs-5">To learn more about how GM Energy benefits, enter your zip code below:</label>
-                <div class="d-grid gap-2 d-sm-flex justify-content-sm-center align-items-center my-1">
-                    <input type="text" class="form-control" id="zip" name="zip" style="max-width: 256px;">
-                </div>    
-                <label for="evs" class="form-label fw-bold fs-5">How many EV's are in your household?</label>
-                <div class="d-grid gap-2 d-sm-flex justify-content-sm-center align-items-center my-1">
-                    <input type="text" class="form-control" id="evs" name="evs" style="max-width: 256px;">
-                </div>    
-                <label for="size" class="form-label fw-bold fs-5">What is the square footage of your household?</label>
-                <div class="d-grid gap-2 d-sm-flex justify-content-sm-center align-items-center my-1">
-                    <input type="text" class="form-control" id="size" name="size" style="max-width: 256px;">
-                </div>    
-                <div class="d-grid gap-2 d-sm-flex justify-content-sm-center my-2">
-                    <button type="submit" class="btn btn-primary btn-lg px-4 gap-3">Submit</button>
-                </div>            
-            </div>
-        </form>
-     </main>      
-   </body>
+<body>
+<main>
+    <div class="px-4 py-3 my-2 text-center">
+        <img class="d-block mx-auto mb-4" src="{{ url_for('static', filename='images/new-GM-logo-2021.jpg') }}" alt="GM Logo" width="192" height="192"/>
+        <h1 class="display-6 fw-bold text-primary">Welcome to GM Energy</h1>            
+    </div>
+    <form method="post" action="{{ url_for('hello') }}">
+        <div class="col-md-6 mx-auto text-center">
+            <label for="zip" class="form-label fw-bold fs-5">To learn more about how GM Energy benefits, enter your zip code below:</label>
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center align-items-center my-1">
+                <input type="text" class="form-control" id="zip" name="zip" style="max-width: 256px;">
+            </div>    
+            <label for="evs" class="form-label fw-bold fs-5">How many EV's are in your household?</label>
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center align-items-center my-1">
+                <input type="text" class="form-control" id="evs" name="evs" style="max-width: 256px;">
+            </div>    
+            <label for="size" class="form-label fw-bold fs-5">What is the square footage of your household?</label>
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center align-items-center my-1">
+                <input type="text" class="form-control" id="size" name="size" style="max-width: 256px;">
+            </div>    
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center my-2">
+                <button type="submit" class="btn btn-primary btn-lg px-4 gap-3">Submit</button>
+            </div>            
+        </div>
+    </form>
+ </main>      
+</body>
 </html>
-
-
 
 
 
