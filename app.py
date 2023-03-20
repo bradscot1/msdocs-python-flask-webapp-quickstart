@@ -103,7 +103,7 @@ def hello():
 
 
         duration_datasets = [{
-            'label': 'Blackout Duration',
+            'label': 'Blackout Duration (hours)',
             'data': [duration_data['Spring'], duration_data['Summer'], duration_data['Fall'], duration_data['Winter']],
             'backgroundColor': colors
         }]
