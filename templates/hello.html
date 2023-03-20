@@ -9,19 +9,44 @@
      <main>
         <div class="px-4 py-3 my-2 text-center">
             <img class="d-block mx-auto mb-4" src="{{ url_for('static', filename='images/new-GM-logo-2021.jpg') }}" alt="GM Logo" width="192" height="192"/>
-            <!-- <img  src="/docs/5.1/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57"> -->
             <h1 class="display-6 fw-bold">Zipcode {{zip}}</h1>
             <p class="fs-5">
                 Energy performance metrics
             </p>
             <div class="container">
-                <canvas id="Energy Surge Costs Due to Outages by Season"></canvas>
+                <canvas id="myChart"></canvas>
             </div>
             <a href="{{ url_for('index') }}" class="btn btn-primary btn-lg px-4 gap-3">Home</a>
         </div>
      </main>
      <script src="{{ url_for('static', filename='js/Chart.min.js') }}"></script>
      <script>
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var chart = new Chart(ctx, {
+            // The type of chart we want to create
+            type: 'line',
+
+
+            // The data for our dataset
+            data: {
+                labels: ['Spring', 'Summer', 'Fall', 'Winter'],
+                datasets: [{
+                    label: 'Energy Surge Costs Due to Outages by Season',
+                    backgroundColor: 'rgb(255, 99, 132)',
+                    borderColor: 'rgb(255, 99, 132)',
+                    data: [
+                        {{ graph_data['Energy surge costs due to outages']['spring'] }},
+                        {{ graph_data['Energy surge costs due to outages']['summer'] }},
+                        {{ graph_data['Energy surge costs due to outages']['fall'] }},
+                        {{ graph_data['Energy surge costs due to outages']['winter'] }}
+                    ]
+                }]
+            },
+
+
+            // Configuration options go here
+            options: {}
+        });
      </script>
    </body>
 </html>
