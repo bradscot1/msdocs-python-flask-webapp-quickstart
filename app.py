@@ -17,7 +17,6 @@ app.config['REFERRER_POLICY'] = 'no-referrer-when-downgrade'
 def index():
     return render_template('index.html')
 
-
 @app.route('/hello', methods=['POST'])
 def hello():
     
