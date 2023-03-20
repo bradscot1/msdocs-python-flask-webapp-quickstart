@@ -13,9 +13,15 @@
   <div class="chart-container">
       <div class="chart-box">
           <canvas id="myChart"></canvas>
+          <div class="chart-label">
+            <h2 style="color:white; font-size:2rem;">Increased Energy Costs in your Region</h2>
+          </div>
       </div>
       <div class="chart-box">
           <canvas id="barChart"></canvas>
+          <div class="chart-label">
+            <h2 style="color:white; font-size:2rem;">Blackout Total Hours by Season</h2>
+          </div>
       </div>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -35,16 +41,19 @@
                   scaleLabel: {
                     display: true,
                     labelString: 'Avg Cost Increase Per Person',
-                    fontSize: 18 // change font size for yAxes label
+                    fontSize: 18, // change font size for yAxes label
+                    fontColor: 'white' // set font color to white
                   },
                   ticks: {
                       beginAtZero: true,
-                      fontSize: 16 // change font size for yAxes ticks
+                      fontSize: 16, // change font size for yAxes ticks
+                      fontColor: 'white' // set font color to white
                   }
               }],
               xAxes: [{
                   ticks: {
-                      fontSize: 16 // change font size for xAxes ticks
+                      fontSize: 16, // change font size for xAxes ticks
+                      fontColor: 'white' // set font color to white
                   }
               }]
           }
@@ -56,28 +65,29 @@
                   scaleLabel: {
                     display: true,
                     labelString: 'Hours',
-                    fontSize: 18 // change font size for yAxes label
+                    fontSize: 18, // change font size for yAxes label
+                    fontColor: 'white' // set font color to white
                   },
                   ticks: {
                       beginAtZero: true,
-                      fontSize: 16 // change font size for yAxes ticks
+                      fontSize: 16, // change font size for yAxes ticks
+                      fontColor: 'white' // set font color to white
                   }
               }],
               xAxes: [{
                   ticks: {
-                      fontSize: 16 // change font size for xAxes ticks
+                      fontSize: 16, // change font size for xAxes ticks
+                      fontColor: 'white' // set font color to white
                   }
               }]
           },
           legend: {
-              labels: {
-                  fontColor: 'black' // set font color to black
-              }
+              display: false // hide legend
           }
       };
      
       barChart.data.datasets[0].backgroundColor = 'transparent'; // set background color to transparent for duration dataset
-      barChart.data.datasets[0].borderColor = 'black'; // set border color to black for duration dataset
+      barChart.data.datasets[0].borderColor = 'white'; // set border color to white for duration dataset
   </script>
 </body>
 </html>
