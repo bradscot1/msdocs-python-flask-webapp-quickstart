@@ -18,41 +18,31 @@ def index():
     return render_template('index.html')
 
 @app.route('/hello', methods=['POST'])
+import csv
+import os
+import json
+from flask import Flask, render_template, request, redirect, url_for, send_from_directory
+
+app = Flask(__name__)
+
+def read_csv_file(filename):
+    with open(filename, 'r') as f:
+        reader = csv.DictReader(f)
+        data = [row for row in reader]
+    return data
+
+@app.route('/hello', methods=['POST'])
 def hello():
     zip_code = request.form.get('zip')
     if not zip_code:
         return redirect(url_for('index'))
 
-    server = 'quotechies.database.windows.net'
-    database = 'quotechies-db'
-    username = 'bscott129@quotechies'
-    password = 'hackathon10!'
-    driver = '{ODBC Driver 17 for SQL Server}'
-
-    connection_string = f"mssql+pyodbc://{username}:{password}@{server}/{database}?driver={driver}"
-    engine = create_engine(connection_string)
-    conn = engine.connect()
-
-    query = text("INSERT INTO session2 (zip_code) VALUES (:zip)")
-    conn.execute(query, zip=zip_code)
-
-    query = text("""
-        SELECT Season, Reason, SUM(Total_Cost) AS Total_Cost
-        FROM energy_metrics
-        GROUP BY Season, Reason
-        ORDER BY
-            CASE Season
-                WHEN 'Spring' THEN 1
-                WHEN 'Summer' THEN 2
-                WHEN 'Fall' THEN 3
-                WHEN 'Winter' THEN 4
-            END
-    """)
-    data = conn.execute(query)
+    # Read data from CSV file
+    data = read_csv_file('static\data\outage_mock.csv')
 
     graph_data = {}
     for row in data:
-        Season, Reason, Total_Cost = row
+        Season, Reason, Total_Cost = row['Season'], row['Reason'], float(row['Total_Cost'])
         if Reason not in graph_data:
             graph_data[Reason] = {
                 'Spring': 0,
@@ -60,9 +50,7 @@ def hello():
                 'Fall': 0,
                 'Winter': 0
             }
-        graph_data[Reason][Season] = Total_Cost
-
-    conn.close()
+        graph_data[Reason][Season] += Total_Cost
 
     x_labels = ['Spring', 'Summer', 'Fall', 'Winter']
     datasets = []
@@ -92,12 +80,13 @@ def hello():
         }
     }
 
-
     chart_json = json.dumps(chart_data)
-
 
     return render_template('hello.html', zip=zip_code, chart_data=chart_json)
 
 @app.route('/favicon.ico')
 def favicon():
     return send_from_directory(os.path.join(app.root_path, 'static'), 'favicon.ico', mimetype='image/vnd.microsoft.icon')
+
+
+
