@@ -2,17 +2,23 @@
 <html>
 <head>
     <title>Quotechies</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <h1>Zipcode {{zip}}</h1>
     <h2>Energy performance metrics</h2>
     <div>
-        <img src="data:image/png;base64,{{ image_string }}" alt="Energy Surge Costs Due to Outages by Season">
+        <canvas id="myChart"></canvas>
     </div>
+    <script>
+        var chartData = JSON.parse('{{ chart_data | safe }}');
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var chart = new Chart(ctx, {
+            type: chartData.type,
+            data: chartData.data,
+            options: chartData.options
+        });
+    </script>
 </body>
 </html>
-
-
-
-
 

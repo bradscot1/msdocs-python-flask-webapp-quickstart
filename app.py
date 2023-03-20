@@ -7,20 +7,15 @@ import io
 import base64
 import traceback
 import sys
-
-
+import json
 
 
 app = Flask(__name__)
 
 
-
-
 @app.route('/')
 def index():
     return render_template('index.html')
-
-
 
 
 @app.route('/hello', methods=['POST'])
@@ -48,7 +43,7 @@ def hello():
 
 
         query = text("""
-            SELECT Season, Reason, AVG(Avg_Price)
+            SELECT Season, Reason, AVG(Avg_Price) AS Avg_Price
             FROM weather_incidents
             GROUP BY Season, Reason
             ORDER BY
@@ -67,12 +62,12 @@ def hello():
             season, reason, avg_price = row
             if reason not in graph_data:
                 graph_data[reason] = {
-                    'spring': 0,
-                    'summer': 0,
-                    'fall': 0,
-                    'winter': 0
+                    'Spring': 0,
+                    'Summer': 0,
+                    'Fall': 0,
+                    'Winter': 0
                 }
-            graph_data[reason][season.lower()] = avg_price
+            graph_data[reason][season] = avg_price
 
 
         conn.close()
@@ -81,7 +76,7 @@ def hello():
         x_labels = ['Spring', 'Summer', 'Fall', 'Winter']
         datasets = []
         for reason, values in graph_data.items():
-            data = [values['spring'], values['summer'], values['fall'], values['winter']]
+            data = [values['Spring'], values['Summer'], values['Fall'], values['Winter']]
             datasets.append({
                 'label': reason,
                 'data': data,
@@ -108,7 +103,10 @@ def hello():
         }
 
 
-        return render_template('hello.html', zip=zip_code, chart_data=chart_data)
+        chart_json = json.dumps(chart_data)
+
+
+        return render_template('hello.html', zip=zip_code, chart_data=chart_json)
 
 
     except Exception:
@@ -116,13 +114,6 @@ def hello():
         return render_template('error.html')
 
 
-
-
 @app.route('/favicon.ico')
 def favicon():
     return send_from_directory(os.path.join(app.root_path, 'static'), 'favicon.ico', mimetype='image/vnd.microsoft.icon')
-
-
-
-
-
