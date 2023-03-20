@@ -9,7 +9,6 @@ import json
 app = Flask(__name__)
 app.config['REFERRER_POLICY'] = 'no-referrer-when-downgrade'
 
-
 def read_csv_file(filename):
     with open(filename, 'r') as f:
         reader = csv.DictReader(f)
@@ -143,8 +142,3 @@ def index():
 
 if __name__ == '__main__':
     app.run()
-
-
-
-
-
