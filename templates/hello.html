@@ -79,11 +79,11 @@
         phoneInput.setAttribute('placeholder', 'Phone');
         submitButton.setAttribute('type', 'submit');
         submitButton.innerHTML = 'Submit';
-        contactForm.appendChild(emailInput);
-        contactForm.appendChild(phoneInput);
-        contactForm.appendChild(submitButton);
-        recommendationDiv.appendChild(recommendationList);
-        recommendationDiv.appendChild(contactForm);
+        emailInput.setAttribute('type', 'email');
+        emailInput.setAttribute('placeholder', 'Email');
+        phoneInput.setAttribute('type', 'tel');
+        phoneInput.setAttribute('placeholder', 'Phone');
+        submitButton.setAttribute('type', 'submit');
         generateButton.style.display = 'none';
       });
   </script>
