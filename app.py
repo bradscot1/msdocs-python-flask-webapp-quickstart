@@ -25,7 +25,6 @@ def hello():
         if not zip_code:
             return redirect(url_for('index'))
 
-
         server = 'quotechies.database.windows.net'
         database = 'quotechies-db'
         username = 'bscott129@quotechies'
