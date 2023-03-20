@@ -45,7 +45,9 @@ a:link {
     color: blue;
   }
  
-
+  form {
+    padding: 5px;
+  }
   
 
 
