@@ -17,8 +17,8 @@
         var chart = new Chart(ctx, {{ chart_data|safe }});
 
         var barCtx = document.getElementById('barChart').getContext('2d');
-        var barChart = new Chart(barCtx, {{ duration_chart_json|safe }});
-        
+        var barChart = new Chart(barCtx, {{ duration_data|safe }});
+
     </script>
 </body>
 </html>
