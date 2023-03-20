@@ -9,21 +9,12 @@ import traceback
 import sys
 import json
 
-
-
-
 app = Flask(__name__)
 app.config['REFERRER_POLICY'] = 'no-referrer-when-downgrade'
-
-
-
 
 @app.route('/')
 def index():
     return render_template('index.html')
-
-
-
 
 @app.route('/hello', methods=['POST'])
 def hello():
@@ -31,26 +22,22 @@ def hello():
     if not zip_code:
         return redirect(url_for('index'))
 
-
     server = 'quotechies.database.windows.net'
     database = 'quotechies-db'
     username = 'bscott129@quotechies'
     password = 'hackathon10!'
     driver = '{ODBC Driver 17 for SQL Server}'
 
-
     connection_string = f"mssql+pyodbc://{username}:{password}@{server}/{database}?driver={driver}"
     engine = create_engine(connection_string)
     conn = engine.connect()
 
-
     query = text("INSERT INTO session2 (zip_code) VALUES (:zip)")
     conn.execute(query, zip=zip_code)
 
-
     query = text("""
         SELECT Season, Reason, AVG(Avg_Price) AS Avg_Price
-        FROM weather_incidents
+        FROM energy_metrics
         GROUP BY Season, Reason
         ORDER BY
             CASE Season
@@ -61,7 +48,6 @@ def hello():
             END
     """)
     data = conn.execute(query)
-
 
     graph_data = {}
     for row in data:
@@ -75,9 +61,7 @@ def hello():
             }
         graph_data[Reason][Season] = Avg_Price
 
-
     conn.close()
-
 
     x_labels = ['Spring', 'Summer', 'Fall', 'Winter']
     datasets = []
@@ -89,7 +73,6 @@ def hello():
             'borderColor': 'red',
             'fill': False
         })
-
 
     chart_data = {
         'type': 'line',
