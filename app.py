@@ -35,16 +35,9 @@ def hello():
                 }
             graph_data[reason][season] += total_cost
 
-
-
-
         colors = ['red', 'blue', 'green', 'orange', 'purple']
         x_labels = ['Spring', 'Summer', 'Fall', 'Winter']
         datasets = []
-
-
-
-
         for index, (reason, values) in enumerate(graph_data.items()):
             data = [values['Spring'], values['Summer'], values['Fall'], values['Winter']]
             datasets.append({
@@ -53,10 +46,6 @@ def hello():
                 'borderColor': colors[index % len(colors)],
                 'fill': False
             })
-
-
-
-
         chart_data = {
             'type': 'line',
             'data': {
@@ -70,23 +59,16 @@ def hello():
                             'beginAtZero': True
                         }
                     }]
+                },
+                'title': {
+                    'display': True,
+                    'text': 'Increased Energy Costs in your Region'
                 }
             }
         }
-
-
-
-
         chart_json = json.dumps(chart_data)
 
-
-
-
         # Total Blackout Duration
-
-
-
-
         duration_data = {
             'Spring': 0,
             'Summer': 0,
@@ -94,23 +76,15 @@ def hello():
             'Winter': 0
         }
         data = read_csv_file(os.path.join(app.static_folder, 'data', 'outage_mock.csv'))
-   
         for row in data:
             season, duration = row['Season'], int(row['Blackout_Duration'])
             duration_data[season] += duration
 
-
-
-
         duration_datasets = [{
-            'label': 'Blackout Duration (hours)',
+            'label': '',
             'data': [duration_data['Spring'], duration_data['Summer'], duration_data['Fall'], duration_data['Winter']],
             'backgroundColor': colors
         }]
-
-
-
-
         duration_chart_data = {
             'type': 'bar',
             'data': {
@@ -124,20 +98,16 @@ def hello():
                             'beginAtZero': True
                         }
                     }]
+                },
+                'title': {
+                    'display': True,
+                    'text': 'Blackout Total Hours by Season'
                 }
             }
         }
-
-
-
-
         duration_chart_json = json.dumps(duration_chart_data)
 
-
-
-
     return render_template('hello.html', zip=zip_code, chart_data=chart_json, duration_data=duration_chart_json)
-
 
 @app.route('/favicon.ico')
 def favicon():
