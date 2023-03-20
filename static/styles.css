@@ -22,7 +22,26 @@ h1, h2 {
     margin: 0 auto;
 }
 
-
+a:link {
+    color: rgb(0, 255, 13);
+  }
+  
+  /* visited link */
+  a:visited {
+    color: rgb(128, 0, 0);
+  }
+  
+  /* mouse over link */
+  a:hover {
+    color: hotpink;
+  }
+  
+  /* selected link */
+  a:active {
+    color: blue;
+  }
+  
+  
 
 
 
