@@ -81,7 +81,6 @@ def hello():
             duration_data[season] += duration
 
         duration_datasets = [{
-            'label': '',
             'data': [duration_data['Spring'], duration_data['Summer'], duration_data['Fall'], duration_data['Winter']],
             'backgroundColor': colors
         }]
