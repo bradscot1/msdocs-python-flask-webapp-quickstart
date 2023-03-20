@@ -6,17 +6,14 @@ from sqlalchemy import create_engine, text
 import csv
 import json
 
-
 app = Flask(__name__)
 app.config['REFERRER_POLICY'] = 'no-referrer-when-downgrade'
-
 
 def read_csv_file(filename):
     with open(filename, 'r') as f:
         reader = csv.DictReader(f)
         data = [row for row in reader]
     return data
-
 
 @app.route('/hello', methods=['POST'])
 def hello():
@@ -37,20 +34,20 @@ def hello():
                 'Fall': 0,
                 'Winter': 0
             }
-
         graph_data[reason][season] += total_cost
-        colors = ['red', 'blue', 'green', 'orange', 'purple']
-        x_labels = ['Spring', 'Summer', 'Fall', 'Winter']
-        datasets = []
 
-        for index, (reason, values) in enumerate(graph_data.items()):
-            data = [values['Spring'], values['Summer'], values['Fall'], values['Winter']]
-            datasets.append({
-                'label': reason,
-                'data': data,
-                'borderColor': colors[index % len(colors)],
-                'fill': False
-            })
+    colors = ['red', 'blue', 'green', 'orange', 'purple']
+    x_labels = ['Spring', 'Summer', 'Fall', 'Winter']
+    datasets = []
+
+    for index, (reason, values) in enumerate(graph_data.items()):
+        data = [values['Spring'], values['Summer'], values['Fall'], values['Winter']]
+        datasets.append({
+            'label': reason,
+            'data': data,
+            'borderColor': colors[index % len(colors)],
+            'fill': False
+        })
 
     chart_data = {
         'type': 'line',
@@ -109,21 +106,14 @@ def hello():
 
     duration_chart_json = json.dumps(duration_chart_data)
 
-    return render_template('hello.html', zip=zip_code, chart_data=chart_json, duration_data = duration_chart_data)
-
+    return render_template('hello.html', zip=zip_code, chart_data=chart_json, duration_data=duration_chart_data)
 
 @app.route('/favicon.ico')
 def favicon():
     return send_from_directory(os.path.join(app.root_path, 'static'), 'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
-
 @app.route('/')
 def index():
-    return render_template('index.html')
-
-
-if __name__ == '__main__':
-    app.run()
-
+   
 
 
