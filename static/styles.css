@@ -1,4 +1,16 @@
+body {
+    background-color: black;
+    color: white;
+}
+
 .chart-container {
     width: 25%;
     height: 25%;
 }
+
+h1, h2 {
+    color: white;
+}
+
+
+
