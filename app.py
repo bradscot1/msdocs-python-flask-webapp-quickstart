@@ -75,7 +75,8 @@ def hello():
             'Fall': 0,
             'Winter': 0
         }
-
+        data = read_csv_file(os.path.join(app.static_folder, 'data', 'outage_mock.csv'))
+    
         for row in data:
             season, duration = row['Season'], int(row['Blackout_Duration'])
             duration_data[season] += duration
