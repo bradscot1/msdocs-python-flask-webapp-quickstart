@@ -15,6 +15,10 @@
     <script>
         var ctx = document.getElementById('myChart').getContext('2d');
         var chart = new Chart(ctx, {{ chart_data|safe }});
+
+        var barCtx = document.getElementById('barChart').getContext('2d');
+        var barChart = new Chart(barCtx, {{ duration_chart_json|safe }});
+        
     </script>
 </body>
 </html>

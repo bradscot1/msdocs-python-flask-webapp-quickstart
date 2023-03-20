@@ -71,7 +71,45 @@ def hello():
 
     chart_json = json.dumps(chart_data)
 
-    return render_template('hello.html', zip=zip_code, chart_data=chart_json)
+    # Total Blackout Duration
+
+    duration_data = {
+        'Spring': 0,
+        'Summer': 0,
+        'Fall': 0,
+        'Winter': 0
+    }
+
+    for row in data:
+        season, duration = row['Season'], float(row['Duration'])
+        duration_data[season] += duration
+
+    duration_datasets = [{
+        'label': 'Blackout Duration',
+        'data': [duration_data['Spring'], duration_data['Summer'], duration_data['Fall'], duration_data['Winter']],
+        'backgroundColor': colors
+    }]
+
+    duration_chart_data = {
+        'type': 'bar',
+        'data': {
+            'labels': x_labels,
+            'datasets': duration_datasets
+        },
+        'options': {
+            'scales': {
+                'yAxes': [{
+                    'ticks': {
+                        'beginAtZero': True
+                    }
+                }]
+            }
+        }
+    }
+
+    duration_chart_json = json.dumps(duration_chart_data)
+
+    return render_template('hello.html', zip=zip_code, chart_data=chart_json, duration_data = duration_chart_data)
 
 
 @app.route('/favicon.ico')
