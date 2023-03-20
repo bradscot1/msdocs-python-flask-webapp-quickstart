@@ -11,7 +11,7 @@ import json
 
 
 app = Flask(__name__)
-
+app.config['REFERRER_POLICY'] = 'no-referrer-when-downgrade'
 
 @app.route('/')
 def index():

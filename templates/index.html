@@ -13,10 +13,19 @@
           </div>
         <form method="post" action="{{ url_for('hello') }}">
             <div class="col-md-6 mx-auto text-center">
-                <label for="zip" class="form-label fw-bold fs-5">To learn more about how GM Energy can help you, enter your zip code below</label>
+                <label for="zip" class="form-label fw-bold fs-5">To learn more about how GM Energy benefits, enter your zip code below:</label>
                 <div class="d-grid gap-2 d-sm-flex justify-content-sm-center align-items-center my-1">
                     <input type="text" class="form-control" id="zip" name="zip" style="max-width: 256px;">
                 </div>    
+                <label for="evs" class="form-label fw-bold fs-5">How many EV's are in your household?</label>
+                <div class="d-grid gap-2 d-sm-flex justify-content-sm-center align-items-center my-1">
+                    <input type="text" class="form-control" id="evs" name="evs" style="max-width: 256px;">
+                </div>    
+                <label for="size" class="form-label fw-bold fs-5">What is the square footage of your household?</label>
+                <div class="d-grid gap-2 d-sm-flex justify-content-sm-center align-items-center my-1">
+                    <input type="text" class="form-control" id="size" name="size" style="max-width: 256px;">
+                </div>    
+                    <input type="text" class="form-control" id="size" name="size" style="max-width: 256px;">
                 <div class="d-grid gap-2 d-sm-flex justify-content-sm-center my-2">
                     <button type="submit" class="btn btn-primary btn-lg px-4 gap-3">Submit</button>
                 </div>            
