@@ -52,70 +52,7 @@
 
       var barCtx = document.getElementById('barChart').getContext('2d');
       var barChart = new Chart(barCtx, {{ duration_data|safe }});
-     
-      chart.options = {
-          scales: {
-              yAxes: [{
-                  scaleLabel: {
-                    display: true,
-                    labelString: 'Avg Cost Increase Per Person',
-                    fontSize: 18, // change font size for yAxes label
-                    fontColor: 'white' // set font color to white
-                  },
-                  ticks: {
-                      beginAtZero: true,
-                      fontSize: 16, // change font size for yAxes ticks
-                      fontColor: 'white' // set font color to white
-                  }
-              }],
-              xAxes: [{
-                  ticks: {
-                      fontSize: 16, // change font size for xAxes ticks
-                      fontColor: 'white' // set font color to white
-                  },
-                  gridLines: {
-                      color: 'white', // set color for xAxes grid lines
-                  }
-              }]
-          }
-      };
-     
-      barChart.options = {
-          scales: {
-              yAxes: [{
-                  scaleLabel: {
-                    display: true,
-                    labelString: 'Hours',
-                    fontSize: 18, // change font size for yAxes label
-                    fontColor: 'white' // set font color to white
-                  },
-                  ticks: {
-                      beginAtZero: true,
-                      fontSize: 16, // change font size for yAxes ticks
-                      fontColor: 'white' // set font color to white
-                  }
-              }],
-              xAxes: [{
-                  ticks: {
-                      fontSize: 16, // change font size for xAxes ticks
-                      fontColor: 'white' // set font color to white
-                  },
-                  gridLines: {
-                      color: 'white', // set color for xAxes grid lines
-
-
-              }
-          }]
-      },
-      legend: {
-          display: false // remove the legend
-      }
-  };
  
-  barChart.data.datasets[0].backgroundColor = 'transparent'; // set background color to transparent for duration dataset
-  barChart.data.datasets[0].borderColor = 'white'; // set border color to white for duration dataset
-
-
 </script>
 </body>
 </html>
