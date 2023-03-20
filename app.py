@@ -101,7 +101,7 @@ def hello():
                 },
                 'title': {
                     'display': True,
-                    'text': 'Blackout Total Hours by Season'
+                    'text': 'Total Blackout Hours by Season'
                 }
             }
         }
@@ -119,11 +119,3 @@ def index():
 
 if __name__ == '__main__':
     app.run()
-
-
-
-
-
-
-
-
