@@ -81,7 +81,7 @@ def hello():
     }
 
     for row in data:
-        season, duration = row['Season'], float(row['Duration'])
+        season, duration = row['Season'], float(row['Blackout_Duration'])
         duration_data[season] += duration
 
     duration_datasets = [{
