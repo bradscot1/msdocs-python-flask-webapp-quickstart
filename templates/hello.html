@@ -60,8 +60,6 @@
  
       var generateButton = document.getElementById('generate-recommendation');
 
-      var generateButton = document.getElementById('generateButton');
-
       generateButton.addEventListener('click', function() {
       var recommendationDiv = document.getElementById('recommendation');
       var recommendationList = document.createElement('ul');
@@ -72,7 +70,6 @@
       recommendationList.appendChild(recommendation1);
       recommendationList.appendChild(recommendation2);
       recommendationDiv.appendChild(recommendationList);
-
       var contactForm = document.createElement('form');
       var emailInput = document.createElement('input');
       var phoneInput = document.createElement('input');
@@ -83,11 +80,7 @@
       phoneInput.setAttribute('placeholder', 'Phone');
       submitButton.setAttribute('type', 'submit');
       submitButton.innerHTML = 'Submit';
-      contactForm.appendChild(emailInput);
-      contactForm.appendChild(phoneInput);
-      contactForm.appendChild(submitButton);
-      recommendationDiv.appendChild(contactForm);
-
+      submitButton.setAttribute('type', 'submit');
       submitButton.addEventListener('click', function() {
         emailInput.value = '';
         phoneInput.value = '';
