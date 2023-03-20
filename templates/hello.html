@@ -7,15 +7,15 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-  <div class="text-center">
-    <h1>Entered Zipcode: {{ zip }}</h1>
-  </div>
+  <h1>Your zipcode:{{ zip }}</h1>
   <div class="chart-container">
       <div class="chart-box">
           <canvas id="myChart"></canvas>
+          <h2 class="chart-title text-white fs-4 fw-bold">Increased Energy Costs in your Region</h2>
       </div>
       <div class="chart-box">
           <canvas id="barChart"></canvas>
+          <h2 class="chart-title text-white fs-4 fw-bold">Blackout Total Hours by Season</h2>
       </div>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -26,45 +26,6 @@
 
       var barCtx = document.getElementById('barChart').getContext('2d');
       var barChart = new Chart(barCtx, {{ duration_data|safe }});
-      
-      chart.options = {
-          scales: {
-              yAxes: [{
-                  ticks: {
-                      beginAtZero: true,
-                      fontSize: 16 // change font size for yAxes ticks
-                  }
-              }],
-              xAxes: [{
-                  ticks: {
-                      fontSize: 16 // change font size for xAxes ticks
-                  }
-              }]
-          }
-      };
-      
-      barChart.options = {
-          scales: {
-              yAxes: [{
-                  ticks: {
-                      beginAtZero: true,
-                      fontSize: 16 // change font size for yAxes ticks
-                  }
-              }],
-              xAxes: [{
-                  ticks: {
-                      fontSize: 16 // change font size for xAxes ticks
-                  }
-              }]
-          },
-          legend: {
-              labels: {
-                  fontColor: 'black' // set font color to black
-              }
-          }
-      };
-      
-      barChart.data.datasets[0].backgroundColor = 'transparent'; // set background color to transparent for duration dataset
   </script>
 </body>
 </html>
