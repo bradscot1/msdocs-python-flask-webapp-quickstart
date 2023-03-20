@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, send_from_directory
+from flask import Flask, render_template, request, redirect, url_for, send_from_directory,jsonify
 import os
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -12,10 +12,6 @@ import json
 app = Flask(__name__)
 app.config['REFERRER_POLICY'] = 'no-referrer-when-downgrade'
 
-@app.after_request
-def add_header(response):
-    response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
-    return response
 
 @app.route('/')
 def index():
