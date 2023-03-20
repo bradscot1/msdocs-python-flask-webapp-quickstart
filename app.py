@@ -78,7 +78,7 @@ def hello():
         data = read_csv_file(os.path.join(app.static_folder, 'data', 'outage_mock.csv'))
     
         for row in data:
-            season, duration = row['Season'], int(row['Blackout_Duration'])
+            season, duration = row['Season'], (row['Blackout_Duration'])
             duration_data[season] += duration
 
         duration_datasets = [{
@@ -118,6 +118,9 @@ def index():
 
 if __name__ == '__main__':
     app.run()
+
+
+
 
 
 
