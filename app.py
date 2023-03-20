@@ -106,7 +106,7 @@ def hello():
 
     duration_chart_json = json.dumps(duration_chart_data)
 
-    return render_template('hello.html', zip=zip_code, chart_data=chart_json, duration_data=duration_chart_data)
+    return render_template('hello.html', zip=zip_code, chart_data=chart_json, duration_data=duration_chart_json)
 
 @app.route('/favicon.ico')
 def favicon():
