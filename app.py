@@ -23,8 +23,7 @@ def favicon():
 
 @app.route('/hello', methods=['POST'])
 def hello():
-    zip2 = request.form.get('zip')
-    zip='000'
+    zip = request.form.get('zip')
     if zip:
         print('Request for hello page received with zip=%s' % zip)
 
