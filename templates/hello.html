@@ -42,17 +42,52 @@
           <canvas id="barChart"></canvas>
       </div>
   </div>
+  
+  <div class="text-center">
+    <button id="generate-recommendation">Generate Recommendation</button>
+    <div id="recommendation"></div>
+    <a href="https://www.gmenergy.com/">Learn more about our products here "GM Energy"</a>
+  </div>
+
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
       var ctx = document.getElementById('myChart').getContext('2d');
       var chart = new Chart(ctx, {{ chart_data|safe }});
 
-
-
-
       var barCtx = document.getElementById('barChart').getContext('2d');
       var barChart = new Chart(barCtx, {{ duration_data|safe }});
  
-</script>
+      var generateButton = document.getElementById('generate-recommendation');
+
+      generateButton.addEventListener('click', function() {
+        var recommendationDiv = document.getElementById('recommendation');
+        var recommendationList = document.createElement('ul');
+        var recommendation1 = document.createElement('li');
+        var recommendation2 = document.createElement('li');
+        recommendation1.innerHTML = 'Home battery';
+        recommendation2.innerHTML = 'Solar panel';
+        recommendationList.appendChild(recommendation1);
+        recommendationList.appendChild(recommendation2);
+        var contactForm = document.createElement('form');
+        var emailInput = document.createElement('input');
+        var phoneInput = document.createElement('input');
+        var submitButton = document.createElement('button');
+        emailInput.setAttribute('type', 'email');
+        emailInput.setAttribute('placeholder', 'Email');
+        phoneInput.setAttribute('type', 'tel');
+        phoneInput.setAttribute('placeholder', 'Phone');
+        submitButton.setAttribute('type', 'submit');
+        submitButton.innerHTML = 'Submit';
+        contactForm.appendChild(emailInput);
+        contactForm.appendChild(phoneInput);
+        contactForm.appendChild(submitButton);
+        recommendationDiv.appendChild(recommendationList);
+        recommendationDiv.appendChild(contactForm);
+        generateButton.style.display = 'none';
+      });
+  </script>
 </body>
 </html>
+
+
+
