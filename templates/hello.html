@@ -19,8 +19,8 @@
             <a href="{{ url_for('index') }}" class="btn btn-primary btn-lg px-4 gap-3">Home</a>
         </div>
      </main>
-     <script src="{{ url_for('static', filename='js/Chart.min.js') }}"></script>
-     <script>
+     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script>
         var ctx = document.getElementById('myChart').getContext('2d');
         var chart = new Chart(ctx, {
             // The type of chart we want to create
