@@ -37,7 +37,7 @@ def hello():
     conn.execute(query, zip=zip_code)
 
     query = text("""
-        SELECT Season, Reason, AVG(Avg_Price) AS Avg_Price
+        SELECT Season, Reason, SUM(Total_Cost) AS Total_Cost
         FROM energy_metrics
         GROUP BY Season, Reason
         ORDER BY
@@ -52,7 +52,7 @@ def hello():
 
     graph_data = {}
     for row in data:
-        Season, Reason, Avg_Price = row
+        Season, Reason, Total_Cost = row
         if Reason not in graph_data:
             graph_data[Reason] = {
                 'Spring': 0,
@@ -60,7 +60,7 @@ def hello():
                 'Fall': 0,
                 'Winter': 0
             }
-        graph_data[Reason][Season] = Avg_Price
+        graph_data[Reason][Season] = Total_Cost
 
     conn.close()
 
