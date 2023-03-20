@@ -10,21 +10,19 @@
     <h1>Your zipcode:{{ zip }}</h1>
     <div class="chart-container">
         <canvas id="myChart"></canvas>
+        <canvas id="barChart"></canvas>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         var ctx = document.getElementById('myChart').getContext('2d');
         var chart = new Chart(ctx, {{ chart_data|safe }});
 
+
         var barCtx = document.getElementById('barChart').getContext('2d');
         var barChart = new Chart(barCtx, {{ duration_data|safe }});
     </script>
 </body>
 </html>
-
-
-
-
 
 
 
