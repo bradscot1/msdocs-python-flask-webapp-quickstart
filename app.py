@@ -18,12 +18,13 @@ def read_csv_file(filename):
     return data
 
 @app.route('/hello', methods=['POST'])
+@app.route('/hello', methods=['POST'])
 def hello():
     zip_code = request.form.get('zip')
     if not zip_code:
         return redirect(url_for('index'))
+
     # Read data from CSV file
-   # Read data from CSV file
     else:
         data = read_csv_file(os.path.join(app.static_folder, 'data', 'outage_mock.csv'))
         graph_data = {}
@@ -86,8 +87,9 @@ def hello():
             duration_data[season] += duration
 
         duration_datasets = [{
+            'label': '',
             'data': [duration_data['Spring'], duration_data['Summer'], duration_data['Fall'], duration_data['Winter']],
-            'backgroundColor': 'white'
+            'backgroundColor': colors[:len(duration_data)],
         }]
         duration_chart_data = {
             'type': 'bar',
