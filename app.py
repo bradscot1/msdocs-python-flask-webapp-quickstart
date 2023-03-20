@@ -20,10 +20,8 @@ def hello():
     zip_code = request.form.get('zip')
     if not zip_code:
         return redirect(url_for('index'))
-
     # Read data from CSV file
     data = read_csv_file(os.path.join(app.static_folder, 'data', 'outage_mock.csv'))
-
     graph_data = {}
     for row in data:
         season, reason, total_cost = row['Season'], row['Reason'], float(row['Total_Cost'])
@@ -78,7 +76,7 @@ def hello():
     }
 
     for row in data:
-        season, duration = row['Season'], float(row['Blackout_Duration'])
+        season, duration = row['Season'], int(row['Blackout_Duration'])
         duration_data[season] += duration
 
     duration_datasets = [{
@@ -115,7 +113,6 @@ def favicon():
 @app.route('/')
 def index():
    return render_template('index.html')
-
 
 if __name__ == '__main__':
     app.run()
