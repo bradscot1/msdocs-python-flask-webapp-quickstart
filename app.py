@@ -9,21 +9,10 @@ import traceback
 import sys
 import json
 import csv
+import numpy
 
 app = Flask(__name__)
 app.config['REFERRER_POLICY'] = 'no-referrer-when-downgrade'
-
-
-@app.route('/')
-def index():
-    return render_template('index.html')
-
-@app.route('/hello', methods=['POST'])
-
-
-from flask import Flask, render_template, request, redirect, url_for, send_from_directory
-
-app = Flask(__name__)
 
 def read_csv_file(filename):
     with open(filename, 'r') as f:
