@@ -1,55 +1,47 @@
-<!doctype html>
+<!DOCTYPE html>
+<html>
 <head>
     <title>Quotechies</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}">
-    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
 </head>
-<html>
-   <body>
-     <main>
-        <div class="px-4 py-3 my-2 text-center">
-            <img class="d-block mx-auto mb-4" src="{{ url_for('static', filename='images/new-GM-logo-2021.jpg') }}" alt="GM Logo" width="192" height="192"/>
-            <h1 class="display-6 fw-bold">Zipcode {{zip}}</h1>
-            <p class="fs-5">
-                Energy performance metrics
-            </p>
-            <div class="container">
-                <canvas id="myChart"></canvas>
-            </div>
-            <a href="{{ url_for('index') }}" class="btn btn-primary btn-lg px-4 gap-3">Home</a>
-        </div>
-     </main>
-     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <script>
+<body>
+    <h1>Zipcode {{zip}}</h1>
+    <h2>Energy performance metrics</h2>
+    <div>
+        <canvas id="myChart"></canvas>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
         var ctx = document.getElementById('myChart').getContext('2d');
         var chart = new Chart(ctx, {
-            // The type of chart we want to create
             type: 'line',
-            // The data for our dataset
             data: {
                 labels: ['Spring', 'Summer', 'Fall', 'Winter'],
-                datasets: [{
-                    label: 'Energy Surge Costs Due to Outages by Season',
-                    backgroundColor: 'rgb(255, 99, 132)',
-                    borderColor: 'rgb(255, 99, 132)',
-                    data: [
-                        {{ graph_data['Energy surge costs due to outages']['Spring'] }},
-                        {{ graph_data['Energy surge costs due to outages']['Summer'] }},
-                        {{ graph_data['Energy surge costs due to outages']['Fall'] }},
-                        {{ graph_data['Energy surge costs due to outages']['Winter'] }}
-                    ]
-                }]
+                datasets: [
+                    {
+                        label: 'Reason 1',
+                        data: [12, 19, 3, 5],
+                        borderColor: 'red',
+                        fill: false
+                    },
+                    {
+                        label: 'Reason 2',
+                        data: [3, 7, 2, 10],
+                        borderColor: 'blue',
+                        fill: false
+                    }
+                ]
             },
-
-
-            // Configuration options go here
-            options: {}
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
         });
-     </script>
-   </body>
+    </script>
+</body>
 </html>
-
-
-
-
 
