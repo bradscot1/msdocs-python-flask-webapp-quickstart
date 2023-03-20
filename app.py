@@ -98,14 +98,6 @@ def hello():
 
     return render_template('hello.html', zip=zip_code, chart_data=chart_json)
 
-
-
-
 @app.route('/favicon.ico')
 def favicon():
     return send_from_directory(os.path.join(app.root_path, 'static'), 'favicon.ico', mimetype='image/vnd.microsoft.icon')
-
-
-
-
-
