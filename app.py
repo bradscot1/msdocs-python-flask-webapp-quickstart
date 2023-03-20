@@ -6,7 +6,6 @@ from sqlalchemy import create_engine, text
 import csv
 import json
 
-
 app = Flask(__name__)
 app.config['REFERRER_POLICY'] = 'no-referrer-when-downgrade'
 
@@ -17,7 +16,6 @@ def read_csv_file(filename):
         data = [row for row in reader]
     return data
 
-@app.route('/hello', methods=['POST'])
 @app.route('/hello', methods=['POST'])
 def hello():
     zip_code = request.form.get('zip')
