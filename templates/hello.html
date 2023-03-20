@@ -60,32 +60,42 @@
  
       var generateButton = document.getElementById('generate-recommendation');
 
+      var generateButton = document.getElementById('generateButton');
+
       generateButton.addEventListener('click', function() {
-        var recommendationDiv = document.getElementById('recommendation');
-        var recommendationList = document.createElement('ul');
-        var recommendation1 = document.createElement('li');
-        var recommendation2 = document.createElement('li');
-        recommendation1.innerHTML = 'Home battery: Avoid outages by storing energy at home!';
-        recommendation2.innerHTML = 'Solar panel: Become grid independant by generating your own energy!';
-        recommendationList.appendChild(recommendation1);
-        recommendationList.appendChild(recommendation2);
-        var contactForm = document.createElement('form');
-        var emailInput = document.createElement('input');
-        var phoneInput = document.createElement('input');
-        var submitButton = document.createElement('button');
-        emailInput.setAttribute('type', 'email');
-        emailInput.setAttribute('placeholder', 'Email');
-        phoneInput.setAttribute('type', 'tel');
-        phoneInput.setAttribute('placeholder', 'Phone');
-        submitButton.setAttribute('type', 'submit');
-        submitButton.innerHTML = 'Submit';
-        emailput.setAttribute('placeholder', 'Email');
-        phoneInput.setAttribute('type', 'tel');
-        phoneInput.setAttribute('placeholder', 'Phone');
-        submitButton.setAttribute('type', 'submit');Input.setAttribute('type', 'email');
-        emailIn
-        generateButton.style.display = 'none';
+      var recommendationDiv = document.getElementById('recommendation');
+      var recommendationList = document.createElement('ul');
+      var recommendation1 = document.createElement('li');
+      var recommendation2 = document.createElement('li');
+      recommendation1.innerHTML = 'Home battery: Avoid outages by storing energy at home!';
+      recommendation2.innerHTML = 'Solar panel: Become grid independent by generating your own energy!';
+      recommendationList.appendChild(recommendation1);
+      recommendationList.appendChild(recommendation2);
+      recommendationDiv.appendChild(recommendationList);
+
+      var contactForm = document.createElement('form');
+      var emailInput = document.createElement('input');
+      var phoneInput = document.createElement('input');
+      var submitButton = document.createElement('button');
+      emailInput.setAttribute('type', 'email');
+      emailInput.setAttribute('placeholder', 'Email');
+      phoneInput.setAttribute('type', 'tel');
+      phoneInput.setAttribute('placeholder', 'Phone');
+      submitButton.setAttribute('type', 'submit');
+      submitButton.innerHTML = 'Submit';
+      contactForm.appendChild(emailInput);
+      contactForm.appendChild(phoneInput);
+      contactForm.appendChild(submitButton);
+      recommendationDiv.appendChild(contactForm);
+
+      submitButton.addEventListener('click', function() {
+        emailInput.value = '';
+        phoneInput.value = '';
       });
+    });
+
+
+
   </script>
 </body>
 </html>
