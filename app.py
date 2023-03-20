@@ -10,13 +10,19 @@ import sys
 import json
 
 
+
+
 app = Flask(__name__)
 app.config['REFERRER_POLICY'] = 'no-referrer-when-downgrade'
+
+
 
 
 @app.route('/')
 def index():
     return render_template('index.html')
+
+
 
 
 @app.route('/hello', methods=['POST'])
@@ -59,15 +65,15 @@ def hello():
 
     graph_data = {}
     for row in data:
-        season, reason, avg_price = row
-        if reason not in graph_data:
-            graph_data[reason] = {
+        Season, Reason, Avg_Price = row
+        if Reason not in graph_data:
+            graph_data[Reason] = {
                 'Spring': 0,
                 'Summer': 0,
                 'Fall': 0,
                 'Winter': 0
             }
-        graph_data[reason][season] = avg_price
+        graph_data[Reason][Season] = Avg_Price
 
 
     conn.close()
@@ -75,10 +81,10 @@ def hello():
 
     x_labels = ['Spring', 'Summer', 'Fall', 'Winter']
     datasets = []
-    for reason, values in graph_data.items():
+    for Reason, values in graph_data.items():
         data = [values['Spring'], values['Summer'], values['Fall'], values['Winter']]
         datasets.append({
-            'label': reason,
+            'label': Reason,
             'data': data,
             'borderColor': 'red',
             'fill': False
@@ -107,6 +113,8 @@ def hello():
 
 
     return render_template('hello.html', zip=zip_code, chart_data=chart_json)
+
+
 
 
 @app.route('/favicon.ico')
