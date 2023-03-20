@@ -37,18 +37,20 @@ def hello():
                 'Fall': 0,
                 'Winter': 0
             }
-        graph_data[reason][season] += total_cost
 
-    x_labels = ['Spring', 'Summer', 'Fall', 'Winter']
-    datasets = []
-    for reason, values in graph_data.items():
-        data = [values['Spring'], values['Summer'], values['Fall'], values['Winter']]
-        datasets.append({
-            'label': reason,
-            'data': data,
-            'borderColor': 'red',
-            'fill': False
-        })
+        graph_data[reason][season] += total_cost
+        colors = ['red', 'blue', 'green', 'orange', 'purple']
+        x_labels = ['Spring', 'Summer', 'Fall', 'Winter']
+        datasets = []
+
+        for index, (reason, values) in enumerate(graph_data.items()):
+            data = [values['Spring'], values['Summer'], values['Fall'], values['Winter']]
+            datasets.append({
+                'label': reason,
+                'data': data,
+                'borderColor': colors[index % len(colors)],
+                'fill': False
+            })
 
     chart_data = {
         'type': 'line',

@@ -1,26 +1,29 @@
-<!DOCTYPE html>
-<html>
-  <head>
+<!doctype html>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Quotechies</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Hello</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <h1>Zipcode {{zip}}</h1>
-    <h2>Energy performance metrics</h2>
-    <div>
+    <h1>Your entered zipcode:{{ zip }} !</h1>
+    <div class="chart-container">
         <canvas id="myChart"></canvas>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        var chartData = JSON.parse('{{ chart_data | safe }}');
         var ctx = document.getElementById('myChart').getContext('2d');
-        var chart = new Chart(ctx, {
-            type: chartData.type,
-            data: chartData.data,
-            options: chartData.options
-        });
+        var chart = new Chart(ctx, {{ chart_data|safe }});
     </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
 
